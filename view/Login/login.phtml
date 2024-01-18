@@ -1,0 +1,88 @@
+<?php
+
+$url = explode('/', $_GET['url']);
+$title = mb_convert_case($url[0], MB_CASE_TITLE);
+
+define('BASE_URL', 'https://localhost/dashboard/e-commerce');
+
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require_once(__DIR__ . '/../shared/css_bootstrap.phtml'); ?>
+  <title>NicoShop • <?php echo $title ?></title>
+</head>
+
+<body>
+
+  <div class="container text-center d-flex justify-content-center align-items-center vh-100">
+    <div class="w-50">
+      <h1>
+        <span class="text-primary">Nico</span><span class="text-success">Shop</span>
+      </h1>
+      <br>
+      <h2>Entrar</h2>
+      <br>
+      <form action="<?php echo BASE_URL; ?>/controller/login.php" method="post" class="row g-3 needs-validation" novalidate>
+        <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="email ou nome de usuário" required>
+          <div class="invalid-feedback">
+            Nome ou E-mail incorreto
+          </div>
+        </div>
+        <div class="col-md-12">
+          <input type="text" class="form-control" placeholder="Senha" required>
+          <div class="invalid-feedback">
+            Senha incorreta
+          </div>
+        </div>
+        <nav class="nav flex-column align-items-end">
+          <a class="nav-link" href="esqueceu-senha">Esqueceu senha?</a>
+          <a class="nav-link" href="senha-temporaria">Senha temporária</a>
+        </nav>
+        <button type="submit" class="btn btn-primary">Entrar</button>
+        <p>Ao se registrar, você concorda com o <a href="#">Contrato de Usuário e Cookies</a> e <a href="#">Publicidade na Internet</a> da NichoShop.</p>
+        <p>Não tem uma conta? <a href="registrar">Inscreva-se</a></p>
+      </form>
+    </div>
+  </div>
+
+  <?php require_once(__DIR__ . '/../shared/script_bootstrap.phtml'); ?>
+  <script>
+    function selectType(type) {
+      var btnGroup = document.querySelector('.btn-group');
+      var buttons = btnGroup.querySelectorAll('.btn');
+
+      buttons.forEach(function(button) {
+        button.classList.remove('active');
+      });
+
+      var selectedButton = btnGroup.querySelector('[onclick="selectType(\'' + type + '\')"]');
+      selectedButton.classList.add('active');
+    }
+
+    (function() {
+      'use strict'
+
+      var forms = document.querySelectorAll('.needs-validation')
+
+      Array.prototype.slice.call(forms)
+        .forEach(function(form) {
+          form.addEventListener('submit', function(event) {
+            if (!form.checkValidity()) {
+              event.preventDefault()
+              event.stopPropagation()
+            }
+
+            form.classList.add('was-validated')
+          }, false)
+        })
+    })();
+  </script>
+</body>
+
+</html>

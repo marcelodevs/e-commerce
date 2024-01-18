@@ -1,0 +1,21 @@
+<?php
+$url = explode('/', $_GET['url']);
+$title = mb_convert_case($url[0], MB_CASE_TITLE);
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require_once(__DIR__ . '/../shared/css_bootstrap.phtml'); ?>
+  <title>NicoShop • <?php echo $title ?></title>
+</head>
+
+<body>
+  <?php require_once(__DIR__ . '/../shared/layout.phtml') ?>
+  <?php require_once(__DIR__ . '/../shared/script_bootstrap.phtml'); ?>
+</body>
+
+</html>
